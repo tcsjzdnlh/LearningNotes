@@ -1,0 +1,30 @@
+Qt 5 on Windows ANGLE and OpenGL
+(Redirected from Qt-5-on-Windows-ANGLE-and-OpenGL)
+
+tl;dr;
+Qt 5 on Windows can be configured to use either OpenGL drivers, or DirectX drivers through the ANGLE library. What you want depends on your use case. The Qt project offers binary installers for both variants.
+OpenGL
+OpenGL (Open Graphics Library) is a wide spread industry standard for rendering 2D and 3D computer graphics. It's the de-facto standard for hardware-accelerated graphics operations on Mac OS X, Linux, and most embedded platforms.
+OpenGL ES 2.0 (Open Graphics Library for Embedded Systems) is a stripped-down version of OpenGL for use on embedded systems, which is missing some functions.
+The Qt Quick 2 stack in Qt 5 is based on OpenGL, and requires OpenGL 3.0 (alternatively OpenGL 2.x with the framebuffer_object extension) or higher or OpenGL ES 2.0. The Qt OpenGL module requires OpenGL 1.3 or later.
+OpenGL on Windows
+Although Microsoft Windows has native support for OpenGL since quite some time, the supported standard version (version 1 without any drivers installed) is too limited for Qt . Newer versions are generally available through custom graphics drivers, but require users to install them. Also, the quality of the OpenGL support by some drivers is lacking.
+ANGLE Project
+ANGLE (Almost Native Graphics Layer Engine) is an open source project by Google. Its aim is to map OpenGL ES 2.0 API calls to DirectX 9 API. A regularly updated version of it is part of qtbase .
+To compile Qt with ANGLE you have to have a Direct X SDK installed. Starting from Windows Kit 8, this is included in the Windows SDK.
+If ANGLE is used in your application, you should normally ship d3dcompiler_XX.dll along with the Qt libraries, although on recent Windows versions it comes with the operating system. ANGLE will automatically try to load the newest version it can find, or you can override loading by setting the environment variable QT_D3DCOMPILER_DLL to the name of the compiler DLL you want to use (e.g. "d3dcompiler_47.dll").
+Additionally, ANGLE supports multiple renderers or "platforms" based on the Direct3D version used. Qt, by default, lets ANGLE choose the best platform supported by the machine. If you experience problems, you can override this with the QT_ANGLE_PLATFORM environment variable. Supported values are:
+d3d11: Use Direct3D 11
+d3d9: Use Direct3D 9
+warp: Use the Direct3D 11 software rasterizer
+Recommendations
+Use Desktop OpenGL if
+Your application uses OpenGL calls not part of OpenGL ES 2.0
+Your application does not use OpenGL at all (since ANGLE implies additional deployment dependencies which are then not needed).
+Your application needs to run on Windows XP. Although it is tempting to use ANGLE as a replacement for missing graphics drivers on this platform, it does not fully work and may lead to crashes, for example, when the security dialog is opened.
+Use ANGLE if
+You need OpenGL ES features, but not full OpenGL
+You have a heterogeneous user base with different Windows versions & graphics cards
+You do not want your user to have to install a recent graphics card driver
+You want to use the video playback functionality of QtMultimedia (see QTBUG-31800 )
+Your application needs to run over Windows Remote Desktop Protocol (see OpenGL and Remote Desktop)

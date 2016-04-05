@@ -1,0 +1,201 @@
+
+E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir>E:\XfsFile\CodeLibs\QtCode\Qt5.6\qt-everywhere-opensource-src-5.6.0\configure -developer-build -platform win32-msvc2015 -mp -debug -no-strip -shared -opensource -fontconfig -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib -icu -opengl dynamic -no-openssl -nomake tests -no-compile-examples
++ cd qtbase
++ E:\XfsFile\CodeLibs\QtCode\Qt5.6\qt-everywhere-opensource-src-5.6.0\qtbase\configure.bat -top-level -developer-build -platform win32-msvc2015 -mp -debug -no-strip -shared -opensource -fontconfig -qt-libjpeg -qt-libpng -qt-pcre -qt-zlib -icu -opengl dynamic -no-openssl -nomake tests -no-compile-examples
+
+This is the Qt for Windows Open Source Edition.
+
+You are licensed to use this software under the terms of
+the GNU Lesser General Public License (LGPL) version 2.1
+or the GNU Lesser General Public License (LGPL) version 3.
+
+Type '3' to view the Lesser GNU General Public License version 3 (LGPLv3).
+Type 'L' to view the Lesser GNU General Public License version 2.1 (LGPLv2.1).
+Type 'y' to accept this license offer.
+Type 'n' to decline this license offer.
+
+Do you accept the terms of the license?
+y
+Creating qmake...
+
+Microsoft (R) Program Maintenance Utility Version 14.00.23506.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+Running configuration tests...
+Done running configuration tests.
+Environment:
+    INCLUDE=
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\INCLUDE
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\INCLUDE
+      C:\Program Files (x86)\Windows Kits\10\include\10.0.10240.0\ucrt
+      C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um
+      C:\Program Files (x86)\Windows Kits\8.1\include\\shared
+      C:\Program Files (x86)\Windows Kits\8.1\include\\um
+      C:\Program Files (x86)\Windows Kits\8.1\include\\winrt
+      E:\XfsFile\CodeLibs\BuildQtDependencies\icu\include
+    LIB=
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\LIB
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\ATLMFC\LIB
+      C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x86
+      C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\lib\um\x86
+      C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x86
+      E:\XfsFile\CodeLibs\BuildQtDependencies\icu\lib
+    PATH=
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow
+      C:\Program Files (x86)\MSBuild\14.0\bin
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools
+      C:\Windows\Microsoft.NET\Framework\v4.0.30319
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\VCPackages
+      C:\Program Files (x86)\HTML Help Workshop
+      C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Performance Tools
+      C:\Program Files (x86)\Windows Kits\8.1\bin\x86
+      C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\
+      C:\Python27\
+      C:\Python27\Scripts
+      C:\Perl\site\bin
+      C:\Perl\bin
+      C:\Ruby22\bin
+      C:\Windows\system32
+      C:\Windows
+      C:\Windows\System32\Wbem
+      C:\Windows\System32\WindowsPowerShell\v1.0\
+      C:\Users\xfs\.dnx\bin
+      C:\Program Files\Microsoft DNX\Dnvm\
+      C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\
+      C:\Program Files\Microsoft SQL Server\120\Tools\Binn\
+      C:\Users\xfs\AppData\Roaming\Python\Scripts
+      E:\XfsFile\CodeLibs\BuildQtDependencies\icu\bin
+
+Configuration:
+    warnings_are_errors
+    headersclean
+    pcre
+    debug
+    msvc_mp
+Qt Configuration:
+    private_tests
+    minimal-config
+    small-config
+    medium-config
+    large-config
+    full-config
+    debug
+    shared
+    zlib
+    icu
+    dynamicgl
+    png
+    freetype
+    harfbuzz
+    accessibility
+    opengl
+    dbus
+    audio-backend
+    directwrite
+    native-gestures
+    qpa
+    fontconfig
+    concurrent
+
+QMAKESPEC...................win32-msvc2015 (commandline)
+Architecture................i386, features: sse sse2
+Host Architecture...........i386, features: sse sse2
+Maketool....................nmake
+Debug.......................yes
+Force optimized tools.......
+C++ language standard.......auto
+Link Time Code Generation...no
+Accessibility support.......yes
+RTTI support................yes
+SSE2 support................yes
+SSE3 support................yes
+SSSE3 support...............yes
+SSE4.1 support..............yes
+SSE4.2 support..............yes
+AVX support.................yes
+AVX2 support................yes
+NEON support................no
+OpenGL support..............yes
+Large File support..........yes
+NIS support.................no
+Iconv support...............no
+Evdev support...............no
+Mtdev support...............no
+Inotify support.............no
+eventfd(7) support..........no
+Glib support................no
+CUPS support................no
+OpenVG support..............no
+SSL support.................no
+OpenSSL support.............no
+libproxy support............no
+Qt D-Bus support............runtime
+Qt Widgets module support...yes
+Qt GUI module support.......yes
+QML debugging...............yes
+DirectWrite support.........yes
+Use system proxies..........no
+
+QPA Backends:
+    GDI.....................yes
+    Direct2D................no
+
+Third Party Libraries:
+    ZLIB support............qt
+    GIF support.............plugin
+    JPEG support............plugin
+    PNG support.............yes
+    FreeType support........yes
+    Fontconfig support......yes
+    HarfBuzz support........qt
+    PCRE support............qt
+    ICU support.............yes
+    ANGLE...................no
+    Dynamic OpenGL..........yes
+
+Styles:
+    Windows.................yes
+    Windows XP..............yes
+    Windows Vista...........yes
+    Fusion..................yes
+    Windows CE..............no
+    Windows Mobile..........no
+
+Sql Drivers:
+    ODBC....................no
+    MySQL...................no
+    OCI.....................no
+    PostgreSQL..............no
+    TDS.....................no
+    DB2.....................no
+    SQLite..................plugin (qt)
+    SQLite2.................no
+    InterBase...............no
+
+Sources are in..............E:\XfsFile\CodeLibs\QtCode\Qt5.6\qt-everywhere-opensource-src-5.6.0\qtbase
+Build is done in............E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase
+Install prefix..............E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase
+Headers installed to........E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\include
+Libraries installed to......E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\lib
+Arch-dep. data to...........E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase
+Plugins installed to........E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\plugins
+Library execs installed to..E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\bin
+QML1 imports installed to...E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\imports
+QML2 imports installed to...E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\qml
+Binaries installed to.......E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\bin
+Arch-indep. data to.........E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase
+Docs installed to...........E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\doc
+Translations installed to...E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\translations
+Examples installed to.......E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\examples
+Tests installed to..........E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir\qtbase\tests
+Using internal configuration.
+
+
+
+Qt is now configured for building. Just run nmake.
+To reconfigure, run nmake confclean and configure.
+
+
+E:\XfsFile\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir>

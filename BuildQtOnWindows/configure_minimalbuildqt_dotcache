@@ -1,0 +1,120 @@
+-platform win32-msvc2015
+-mp
+-debug
+-shared
+-opensource 
+-largefile 
+-confirm-license
+-nomake examples 
+-nomake tests
+-skip qtmacextras
+-skip qtimageformats
+-skip qtandroidextras
+-skip qtserialport
+-skip qtserialbus
+-skip qtactiveqt
+
+-skip qtdeclarative 
+-skip qtdoc
+-skip qtgraphicaleffects 
+-skip qtlocation 
+-skip qtquick1 
+-skip qtquickcontrols
+-skip qtquickcontrols2 
+-skip qtscript 
+-skip qttranslations 
+-skip qtwebkit 
+-skip qtwebkit -examples 
+-skip qtx11extras 
+-skip qtxmlpatterns
+-skip qtsvg
+-skip qtcanvas3d
+-skip qtenginio
+-skip qt3d
+-skip qtwayland
+-skip qtconnectivity
+-skip qtwebsockets
+-skip qtwebchannel
+-skip qtsensors
+-skip qtmultimedia
+-skip qtwinextras
+-skip qtwebengine 
+-skip qtwebview
+-no-compile-examples
+-no-openvg
+-no-nis
+-no-mtdev
+-no-inotify
+-no-eventfd
+-no-system-proxies
+-no-zlib
+-no-pcre
+-no-gif
+-no-libpng
+-no-libjpeg
+-no-angle
+-no-incredibuild-xge
+-no-openssl
+-no-libproxy
+-no-audio-backend
+-no-wmf-backend
+-no-qml-debug
+-no-directwrite
+-no-direct2d
+-no-native-gestures
+-no-accessibility 
+-no-freetype 
+-no-harfbuzz
+-no-glib 
+-no-gui 
+-no-widgets 
+-no-cups 
+-no-iconv 
+-no-evdev 
+-no-icu
+-no-fontconfig 
+-no-pch 
+-no-dbus 
+-no-xcb 
+-no-directfb 
+-no-linuxfb 
+-no-kms
+-no-opengl 
+-no-feature-TEXTHTMLPARSER 
+-no-feature-TEXTODFWRITER 
+-no-feature-CSSPARSER
+-no-feature-CONCURRENT 
+-no-feature-DRAGANDDROP 
+-no-feature-SESSIONMANAGER
+-no-feature-SHORTCUT 
+-no-feature-ACTION 
+-no-feature-DOM
+-no-feature-FILESYSTEMMODEL 
+-no-feature-FILESYSTEMWATCHER
+-no-feature-ITEMVIEWS 
+-no-feature-DIRMODEL 
+-no-feature-STANDARDITEMMODEL
+-no-feature-PROXYMODEL 
+-no-feature-SORTFILTERPROXYMODEL
+-no-feature-IDENTITYPROXYMODEL 
+-no-feature-STRINGLISTMODEL
+-no-feature-LISTVIEW 
+-no-feature-TABLEVIEW 
+-no-feature-TREEVIEW
+-no-feature-DATAWIDGETMAPPER 
+-no-feature-COLUMNVIEW 
+-no-feature-MOVIE
+-no-feature-IMAGEFORMAT_PPM 
+-no-feature-IMAGEFORMAT_XBM
+-no-feature-IMAGEFORMAT_XPM 
+-no-feature-FREETYPE 
+-no-feature-BIG_CODECS
+-no-feature-ICONV 
+-no-feature-FTP 
+-no-feature-ACCESSIBILITY
+-no-feature-ANIMATION 
+-no-feature-STATEMACHINE 
+-no-feature-GESTURES
+-no-feature-DBUS 
+-no-feature-XMLSCHEMA 
+-verbose

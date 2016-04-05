@@ -1,0 +1,758 @@
+一、System requirements
+------------------
+	1、
+	   Perl 5.8 or later
+	   Python 2.7 or later
+	   C++ compiler supporting the C++98 standard
+
+	   For other platform specific requirements,
+	   please see section "Setting up your machine" on:
+	   http://wiki.qt.io/Get_The_Source
+	 
+	2、
+	// -----------------------------------
+	 1. ICU
+	 2. ANGLE:
+			Quick 2 moudule: OpenGL 2.1 or higher is required.
+			Windows default OpenGL : OpenGL 1.1. 
+		
+			Qt includes a version of the ANGLE project 
+			which is included from the Windows Qt installers. 
+			
+			ANGLE implements the OpenGL ES 2.0 API on top of DirectX 11 or DirectX 9. 
+			ANGLE requires that the DirectX SDK is installed when building Qt.
+		
+			ANGLE chooses the render backend depending on availability. 
+			DirectX 11 is usually preferable. 
+		
+			However, some graphics cards may not fully support it. 
+			For these cases, 
+			the environment variable QT_ANGLE_PLATFORM (introduced in Qt 5.4) 
+			can be used to control the render backend. 
+			Possible values are d3d11, d3d9 and warp.
+
+			To use a custom version of ANGLE, 
+			set the ANGLE_DIR environment variable 
+			to point to the ANGLE source tree before building Qt.
+
+			If you installed additional OpenGL drivers from your hardware vendor, 
+			then you may want to consider using this version of OpenGL instead of ANGLE. 
+			To use OpenGL, 
+			pass the command line options -opengl desktop to the configure script.
+				like: configure -opengl desktop
+		
+		
+			To use an OpenGL ES 2.0 emulator instead of ANGLE, 
+			use the configure options: -opengl es2 -no-angle.
+				like: configure -opengl es2 -no-angle
+	
+ 
+ 
+	 3. Dynamically Loading Graphics Drivers
+			In addition to the build time configuration, 
+			Qt supports choosing and loading the OpenGL implementation at runtime. 
+			To use this mode, pass -opengl dynamic to the configure script.
+				like: configure -opengl dynamic
+		
+		
+			Note: 
+			As of Qt 5.5 this is the configuration used by the official, 
+			pre-built binary packages of Qt. 
+			It is strongly recommended to use it also in custom builds, 
+			especially for Qt binaries that are deployed alongside applications.
+
+			Note: 
+			Combining -opengl dynamic with -static is also possible, 
+			but be aware that 
+			ANGLE will not be statically linked into the applications in this case, 
+			it will still be built as a shared library.
+		
+		
+			This configuration is the most flexible 
+			because no dependencies or assumptions 
+			are hardcoded about the OpenGL implementation during build time. 
+		
+			It allows robust application deployment. 
+			When a given environment fails to provide a proper OpenGL 2.0 implementation, (xfs add: 第一方案)
+			it will fall back automatically to ANGLE. (xfs add: 第二方案)
+			This fallback will be completely transparent to the application, 
+			and will allow Qt Quick 
+			or other OpenGL code to function by translating to Direct3D. 
+			Such a fallback could, for example, 
+			take place on a Windows 7 PC with no additional graphics drivers installed. 
+			On other machines, 
+			where there is sufficient OpenGL support, 
+			the normal desktop OpenGL drivers will be used. 
+			Additionally, 
+			pure software-based OpenGL implementations (xfs add: 未来可能实现的第三方案，pure software-based OpenGL implementation, 即: 纯软件模拟实现的OpenGL)
+			may be available as additional fallbacks in the future, 
+			allowing running Qt Quick applications without a GPU.
+		
+
+		
+			// xfs add: -opengle dynamic 实现机制
+			When configured with -opengl dynamic, 
+			neither Qt nor the applications built using qmake 
+			will link to the opengl32 (standard desktop OpenGL) 
+			or libGLESv2 (ANGLE) libraries. 
+			Instead, 
+			the appropriate library is chosen at runtime. 
+			By default, 
+			Qt will determine whether the system's opengl32.dll provides OpenGL 2 functions. 
+			If these are present, opengl32.dll is used, 
+			otherwise the ANGLE libraries will be used. 
+			In case the ANGLE libraries are missing 
+			or initialization fails for some reason, 
+			an additional fallback is attempted by trying to load opengl32sw.dll. 
+			See below for details.
+		
+			// xfs add: dynamic loading 的 可选项 和  具体机制 
+			The loading mechanism can be configured 
+			through the QT_OPENGL environment variable 
+			and the following application attributes:
+
+				Qt::AA_UseDesktopOpenGL Equivalent to setting QT_OPENGL to desktop.
+				Qt::AA_UseOpenGLES Equivalent to setting QT_OPENGL to angle.
+				Qt::AA_UseSoftwareOpenGL Equivalent to setting QT_OPENGL to software.
+
+			When a certain configuration is requested explicitly, 
+			no checks are done at application startup, 
+			that is, 
+			the system-provided opengl32.dll will not be examined.
+		
+			// xfs add: 如果启用 dynamic loading, 则有 开发时链接的注意事项
+			The dynamic loading has a significant impact 
+			on applications that contain native OpenGL calls: 
+			they may fail to link 
+			since qmake no longer automatically adds opengl32.lib or libglesv2.lib. 
+			Instead, 
+			applications are expected to use the OpenGL functions 
+			via the QOpenGLFunctions class. 
+			Thus the direct dependency on the OpenGL library is removed 
+			and all calls will be routed 
+			during runtime to the implementation chosen by Qt.
+		
+		
+			// xfs add: application developer 可指定 特定的 OpenGL implementation, 指定方法，及其含义
+			Applications that require a certain OpenGL implementation 
+			(for example, desktop OpenGL due to relying on features provided by OpenGL 3.0 or higher) 
+			should set the application attributes Qt::AA_UseOpenGLES 
+			or Qt::AA_UseDesktopOpenGL 
+			before instantiating QGuiApplication or QApplication. 
+			When these attributes are set, 
+			no other OpenGL implementations are considered. 
+			Additionally, if they wish to, 
+			such applications 
+			are free to make direct OpenGL function calls 
+			by adding opengl32.lib to their .pro project files: LIBS += opengl32.lib (Visual Studio) 
+			or LIBS += -lopengl32 (MinGW). 
+			The result is, 
+			from the application's perspective, 
+			equivalent to the -opengl desktop build configuration of Qt. --->xfs add: (此种方法)就像编译Qt时指定desktop 版本的 OpenGL一样
+		
+		
+			// xfs add: 该段给出了 AA_UseSoftwareOpenGL 的含义 和 名字的设定问题
+			Qt::AA_UseSoftwareOpenGL is special in the sense 
+			that it will try to load an OpenGL implementation with a non-standard name. 
+			The default name is opengl32sw.dll. 
+			This allows shipping a software-only OpenGL implementation, 
+			for example a build of Mesa with llvmpipe, under this name. 
+			If necessary,
+			the filename can be overridden 
+			by setting the QT_OPENGL_DLL environment variable.
+		
+		
+			// xfs add:
+			// JSON-format 格式，
+			// 用于 给出 显卡/显卡驱动 与 OpenGL/Angle/DX/REF 之间的信息(这写信息都是关于 显卡/显卡驱动 对 绘图引擎的支持程度)，
+			// 来确定 某个特定的 机器上最佳的匹配
+		
+			It is possible 
+			to provide a JSON-format configuration file 
+			specifying which OpenGL implementation to use 
+			depending on the graphics card and driver version. 
+			The location is given by the environment variable : QT_OPENGL_BUGLIST. 			
+			Relative paths are resolved 
+			using QLibraryInfo::SettingsPath 
+			or QStandardPaths::ConfigLocation. 
+			The file utilizes the format 
+			of the driver bug list used in The Chromium Projects. 
+			It consists of a list of entries each of which specifies a set of conditions 
+			and a list of feature keywords. 
+			Typically, 
+			device id and vendor id are used to match a specific graphics card. 
+			They can be found in the output of the qtdiag or dxdiag tool.
+		
+			The following feature keywords are relevant for choosing the OpenGL implementation:
+
+				disable_desktopgl - Disables OpenGL. 
+									This ensures that Qt does not attempt to use regular OpenGL (opengl32.dll), 
+									and that it starts with ANGLE right away. 
+									This is useful to prevent bad OpenGL drivers from crashing the application.
+								
+				disable_angle - Disables ANGLE. 
+									Ensures that Qt does not attempt to use ANGLE (and so Direct3D).
+								
+				disable_d3d11 - Disables the D3D11 rasterizer in ANGLE. 
+									Instead, the next D3D rendering option is tried first. 
+									The default order is: 
+									D3D11, D3D9, WARP, reference implementation.
+								
+				disable_d3d9 - Disables the D3D9 rasterizer in ANGLE
+			
+				disable_rotation - Forces the application to run in landscape orientation always. 
+										It applies to OpengGL only 
+										and has no effect when using ANGLE 
+										or Software OpenGL implementations. 
+										This is intended for drivers that have issues with rotation. 
+										This feature keyword was introduced in Qt 5.6.
+			
+				A sample file looks like:
+					{
+						"entries": 
+						[
+							{
+							  "id": 1,
+							  "description": "Disable D3D11 on older nVidia drivers",
+							  "os": 
+							  {
+								"type": "win"
+							  },
+							  "vendor_id": "0x10de",
+							  "device_id": ["0x0DE9"],
+							  "driver_version": 
+							  {
+								"op": "<=",
+								"value": "8.17.12.6973"
+							  },
+							  "features": 
+							  [
+								"disable_d3d11"
+							  ]
+							 },
+					...
+				
+			// xfs add: QT_OPENGL_BUGLIST not specified, built-in list will be used. 以及 built-in list 的大概内容		
+			When QT_OPENGL_BUGLIST is not specified, 
+			a built-in list will be used. 
+			This typically 
+			includes some older, less-capable graphics cards with disable_desktopgl set, 
+			in order to prevent Qt from using their unstable desktop OpenGL implementations 
+			and instead fall back to ANGLE right away.
+
+
+
+			In practice the most common combinations are expected to be the following:
+
+				disable_desktopgl - In case the system provides OpenGL 2.0 or newer, 
+										but the driver is known to be unstable and prone to crash.
+				disable_desktopgl, disable_angle - When no accelerated path is desired. 
+													This ensures that the only option 
+													Qt tries is the sofware rasterizer (opengl32sw.dll). 
+													Can be useful in virtual machines 
+													and applications that are deployed on a wide range of old systems.
+												
+				disable_d3d11, disable_d3d9 - When the accelerated D3D options are known to be unstable 
+												and WARP is desired (when available). 
+												Can be useful in virtual machines.	
+		
+
+
+			// xfs add: 利用下列中的值作为关键字来匹配一个给定的显卡或者显卡驱动
+			The supported keys for matching a given card or driver are the following. 
+			Note that some of these are specific to Qt.
+
+				os.type - Operating system: win, linux, macosx, android
+				os.version - Kernel version
+				os.release - Specifies a list of operating system releases on Windows: xp, vista, 7, 8, 8.1, 10.
+			
+				vendor_id - Vendor from the adapter identifier
+			
+				device_id - List of PCI device IDs.
+			
+				driver_version - Driver version from the adapter identifier
+				driver_description - Matches when the value 
+										is a substring of the driver description from the adapter identifier
+			
+				gl_vendor - Matches when the value is a substring of the GL_VENDOR string
+	// -----------------------------------
+	3、   
+	   Optional requirements
+	   ---------------------
+
+	   - OpenSSL for SSL sockets or HTTPS
+	   - Wayland
+   
+	   New dependencies in Qt 5
+	   ------------------------
+
+		 Qt 5 can make use of the ICU libraries 
+		 providing Unicode and Globalization support 
+		 (see http://site.icu-project.org/). 
+		 They are required for building QtWebKit.
+
+		 On Windows, 
+		 they need to be manually installed 
+		 and the "include" and "lib" folders of the ICU installation 
+		 must be appended to the INCLUDE and LIB environment variables 
+		 after calling the Windows SDK setup script.
+     
+		 The "bin" folder of the ICU installation 
+		 should be appended to the PATH environment variable 
+		 in order to for the DLLs to be found at run-time.  
+
+// -------------------------------------------------------------------------
+二、Build qt configuure options
+// -------------------------------------------------------------------------	 
+// -------------------------------------------------			
+		---(Unless stated otherwise, 
+		---  the commands in this page are for the Linux platforms. )
+// -------------------------------------------------
+	 1.
+	  The default behavior of configure 
+	  is to create an in-source build of Qt 5. 
+	  If you want to install Qt 5 to a separate location, 
+	  you need to specify the command line option -prefix <location>. 
+	  Alternatively, 
+	  the command line option -developer-build 
+	  creates an in-source build for developer usage.
+			in-source build: -developer-build
+			separate location build: -prefix <location>. 		
+ 
+ 
+	 2.	-->xfs add: configure options list
+		 the full list of options, 
+		 enter the command configure -h. 
+		 Configure should be run from the main Qt source directory.
+	 
+		 After running configure, 
+		 build the sources with the make tool 
+		 belonging to the chosen toolchain.
+ 
+ 
+ 
+// -------------------------------------------------
+		一、Source, Build, and Install Directories
+// -------------------------------------------------
+	
+		With configure, 
+		it is possible 
+		to configure Qt to install to a different directory 
+		than the source directory or the build directory. 
+		
+		The source directory contains the source code 
+		and it is obtained from the source package. 
+		
+		The build directory is where the build related files 
+		such as Makefiles, object files, 
+		and other intermediate files are stored. 
+		
+		The install directory 
+		is where the binaries and libraries are installed, 
+		for use either by the system or by the application.
+
+		It is often convenient to use a shadow build, 
+		when the build directory is not the same as the source directory. 
+		
+		This method allows the source directory 
+		to be free from intermediate or generated files, 
+		and allows for multiple simultaneous builds with different configurations. 
+		
+		To shadow-build, 
+		run configure from a separate directory:
+							mkdir ~/qt-build
+							cd ~/qt-build
+							~/qt-source/configure
+			The Makefiles are at ~/qt-build and not in the source directory.
+			
+			
+		
+		
+		After building, 
+		it may be necessary 
+		to install the libraries and binaries into the install directory. 
+		
+		The default for the installation directory depends on the platform; 
+		configure's output mentions it. 
+		
+		To modify the installation directory, 			
+		use the -prefix option:	
+			./configure -prefix /opt/Qt-5.1
+			
+			
+		The installation directory 
+		serves as the parent directory of the bin, lib, 
+		and other installed Qt subdirectories.
+
+		It is possible 
+		to set the install directory 
+		to the same directory as the build directory 
+		(this is termed a non-prefix build). -->xfs add: term , 把...叫做，术语
+		In this case, 
+		Qt can be used straight out of the build directory, 
+		and must not be installed. 
+		This is the default under Windows, 
+		and when Qt is configured with the -developer-build option.
+		
+		
+		Note: When you are explicitly 
+		requesting a non-prefix configuration 
+		for a top-level build of Qt (all modules at once), 
+		set the prefix to $builddir/qtbase, 
+		not $builddir.
+		
+	
+
+
+	// -------------------------------------------------
+			二、Including and Excluding Qt Modules
+	// -------------------------------------------------
+	  1.
+		With configure, 
+		it is possible 
+		to include or exclude 
+		particular Qt modules in a Qt build. 
+		
+		However, 
+		keep in mind that 
+		many modules depend on other modules, 
+		therefore, 
+		dependency issues can arise 
+		with some build configurations.
+		
+	  2.	
+		Excluding a Qt Submodule
+			Configure's -skip option 
+			allows certain Qt submodules 
+			to be excluded from the Qt build. 
+			
+			These submodules correspond 
+			to the Git submodules in the standard Qt 5 repository. 
+			
+			Note that many packages 
+			contain multiple Qt modules. 
+			
+			For example, 
+			to exclude Qt NFC and Qt Bluetooth from the Qt build, 
+			
+			provide -skip qtconnectivity 
+			as the argument to configure：
+				./configure -skip qtconnectivity
+				
+				
+	  3.
+		Including or Excluding Features
+			The -feature-<feature> 
+			and -no-feature-<feature> options 
+			include and exclude specific features, 
+			respectively, 
+			where <feature> is listed 
+			in the file qtbase/src/corelib/global/qfeatures.txt.
+			
+			For example, 
+			to disable Accessibility, 
+			provide -no-feature-accessibility as the argument:
+				./configure -no-feature-accessibility
+				
+			Note: Features outside of qtbase 
+				  are not included in the features list.	
+				
+			
+		
+	// -------------------------------------------------
+			三、Third-Party Libraries
+	// -------------------------------------------------		
+	  1.
+		The Qt source packages 
+		include third-party libraries. 
+		
+		To set 
+		whether Qt should 
+		use the system's versions of the libraries 
+		or to use the bundled version, 
+		
+		pass either -system or 
+		-qt before the name of the library to configure.
+	
+		The table below summarizes the third-party options:
+			
+			Library Name	Bundled in Qt	Installed in System
+			
+			zlib			-qt-zlib		-system-zlib
+			libjpeg			-qt-libjpeg		-system-libjpeg
+			libpng			-qt-libpng		-system-libpng
+			xcb				-qt-xcb			-system-xcb
+			xkbcommon		-qt-xkbcommon	-system-xkbcommon
+			freetype		-qt-freetype	-system-freetype
+			PCRE			-qt-pcre		-system-pcre
+			HarfBuzz-NG		-qt-harfbuzz	-system-harfbuzz
+		
+		It is also possible 
+		to disable support for these libraries 
+		by using -no instead of -qt. 
+		
+		For example, 
+		to use the system's xcb library 
+		and disable zlib support, 
+		enter the following:
+			./configure -no-zlib -qt-libjpeg -qt-libpng -system-xcb
+			
+		For a full list of options, 
+		consult the help with configure -help.		
+
+	// -------------------------------------------------
+			四、Compiler Options
+	// -------------------------------------------------
+	  1.
+		The -platform option 
+		sets the host platform and the compiler 
+		for building the Qt sources. 
+		
+		The list of supported platforms and compilers 
+		is found in the supported platforms page 		
+		while the full list 
+		is available in qtbase/mkspecs directory.
+		
+		For example, 
+		on Ubuntu Linux systems, 
+		Qt can be compiled by several compilers 
+		such as clang or g++:
+			./configure -platform linux-clang
+			./configure -platform linux-g++
+			./configure -platform linux-g++-32
+		
+		
+		For Windows machines, 
+		either MinGW or 
+		Visual Studio toolchains 
+		can be used to compile Qt.
+			configure.bat -platform win32-g++
+			configure.bat -platform win32-msvc2010
+			
+		
+		Afterwards, 
+		the generated Makefiles 
+		will use the appropriate compiler commands.	
+		
+	// -------------------------------------------------
+			五、Cross-Compilation Options
+	// -------------------------------------------------		
+	  1.
+		To configure Qt 
+		for cross-platform development and deployment, 
+		the development toolchain 
+		for the target platform needs to be set up. 
+		This set up varies among the Supported Platforms.
+		
+		Common options are:
+			-xplatform - the target platform. 
+							Valid xplatform options 
+							are the same as the -platform options 
+							which are found in qtbase/mkspecs.
+							
+			-device - a specific device or chipsets.
+							The list of devices 
+							that configure is compatible with 
+							are found in qtbase/mkspecs/devices. 
+							For more information, 
+							visit the Devices Wiki page.
+							
+			-device-option - sets additional qmake variables. 
+								For example, 
+								-device-option CROSS_COMPILE=<path-to-toolchain> 
+								provides the environment variable, 
+								CROSS_COMPILE, 
+								as needed by certain devices.
+		Note: Toolchains for non-desktop targets 
+			  often come with a so-called sysroot 
+			  which Qt needs to be configured against.
+
+
+	// -------------------------------------------------
+			六、Specific Options for Platforms
+	// -------------------------------------------------			  
+	  1.
+		The following pages 
+		provide guidelines on how to configure Qt 
+		for specific platform development:
+
+			Building Qt 5 for Android Wiki page
+			Qt for iOS - Building from Source
+			Qt for WinRT - Building from Source
+			Qt for Embedded Linux - Building from Source
+			Qt for Raspberry Pi - a community-driven site for Raspberry devices
+			Devices - a list of other devices and chipsets
+									
+	
+	// -------------------------------------------------
+			七、OpenGL Options for Windows		
+	// -------------------------------------------------
+	  1.
+		On Windows, 
+		Qt can be configured 
+		with the system OpenGL or 
+		with ANGLE. 
+		
+		By default, 
+		Qt is configured to use ANGLE, 
+		which is bundled with Qt 
+		and depends on the DirectX SDK. 
+		
+		ANGLE enables running Qt applications that depend on OpenGL, 
+		without installing the latest OpenGL libraries.
+		
+		The -opengl option 
+		can be used to configure Qt 
+		to use the OpenGL in the target system, 		
+		a different version of OpenGL ES (with or without ANGLE, different version referes to ES 2.0 and ES 1.0 ), 
+		or dynamically switch between the available OpenGL implementations.
+			like: configure.bat -opengl desktop
+			
+		With the desktop option, 
+		Qt uses the OpenGL installed on Windows, 
+		requiring that the OpenGL in the target Windows machine 
+		is compatible with the application. 
+		
+		The -opengl option 
+		accepts two versions of OpenGL ES, 
+		es2 for OpenGL ES 2.0 or 
+		es1 for OpenGL ES Common Profile.
+			like: configure.bat -opengl es2
+			
+		You can also use -opengl dynamic, 
+		which enable applications 
+		to dynamically switch between the available options at runtime. 
+		
+		For more details 
+		about the benefits of using dynamic GL-switching, 
+		see Graphics Drivers.	
+	
+// -------------------------------------------------------------------------
+三、Build command
+// -------------------------------------------------------------------------		
+   Windows:
+   --------
+   //-----*****--------*****---------*****--------*****--------******---------*****---------*****-------------
+   //-----*****--------*****---------*****--------*****--------******---------*****---------*****-------------
+     Open a Windows SDK (7.0, 7.1 or later) command prompt. 
+	 Ensure that 
+	 the following tools 
+	 can be found in the path:
+     * Perl version 5.12 or later   [http://www.activestate.com/activeperl/]
+     * Python version 2.7 or later  [http://www.activestate.com/activepython/]
+     * Ruby version 1.9.3 or later  [http://rubyinstaller.org/]
+
+     cd <path>\<source_package>
+     configure -prefix %CD%\qtbase <license> -nomake tests
+     nmake // jom // mingw32-make
+
+     To accelerate the bootstrap of qmake with MSVC, 
+	 it may be useful to pass
+     "-make-tool jom" on the configure command line. 
+	 
+	 If you do not use jom,
+     adding "/MP" to the CL environment variable is a good idea.
+
+   //-----*****--------*****---------*****--------*****--------******---------*****---------*****-------------
+   //-----*****--------*****---------*****--------*****--------******---------*****---------*****-------------
+
+// -------------------------------------------------------------------------
+四、Build configure examples
+// -------------------------------------------------------------------------
+	 ======
+
+	 A typical `configure; 
+	 make' build process is used.
+
+	 Some relevant configure options (see configure -help):
+
+	 -release              Compile and link Qt with debugging turned off.
+	 -debug                Compile and link Qt with debugging turned on.
+	 -nomake tests         Disable building of tests to speed up compilation
+	 -nomake examples      Disable building of examples to speed up compilation
+	 -confirm-license      Automatically acknowledge the LGPL 2.1 license.
+
+	 Example for a release build:
+	 (adjust the `-jN' parameter as appropriate for your system)
+
+	   ./configure -prefix $PWD/qtbase <license>
+	   make -j4
+
+	 Example for a developer build:
+	 (enables more autotests, builds debug version of libraries, ...)
+
+	   ./configure -developer-build <license>
+	   make -j4
+
+	 See output of `./configure -help' 
+	 for documentation on various options to configure.
+
+	 The above examples 
+	 will build whatever Qt5 modules 
+	 have been enabled by default in the build system.
+
+	 It is possible 
+	 to build selected modules
+	 with their dependencies by doing a `make module-<foo>'.  
+ 
+	 For example, 
+	 to build only qtscript and qtwebkit,
+	 and the modules they depend on:
+
+	   ./configure -prefix $PWD/qtbase <license>
+	   make -j4 module-qtscript module-qtwebkit
+
+	 This can save a lot of time 
+	 if you are only interested in a subset of Qt5.
+
+ // -------------------------------------------------------------------------
+五、Build Hints
+// -------------------------------------------------------------------------
+ Hints
+ =====
+
+ The submodule repository qtrepotools 
+ contains useful scripts for
+ developers and release engineers. 
+ 
+ Consider adding qtrepotools/bin
+ to your PATH environment variable to access them.
+
+ The qt5_tool in qtrepotools 
+ has some more features which may be of interest.
+ Try `qt5_tool --help'.
+
+
+
+// -------------------------------------------------------------------------
+六、Building Qt5 from git
+// -------------------------------------------------------------------------
+ 
+ See http://wiki.qt.io/Building_Qt_5_from_Git and README.git
+ for more information.
+ See http://wiki.qt.io/Qt_5 for the reference platforms.
+
+ // -------------------------------------------------------------------------
+七、Building  Documentation
+// -------------------------------------------------------------------------
+ 
+ After configuring and compiling Qt, 
+ building the documentation is possible 
+ by running "make docs".
+
+ After having built the documentation, 
+ you need to install it with the following
+ command:
+
+    make install_docs
+
+ 
+ The documentation is installed 
+ in the path set to $QT_INSTALL_DOCS.
+ 
+ Running "qmake -query" will list the value of QT_INSTALL_DOCS.
+
+ Information about Qt 5's documentation is located in qtbase/doc/README
+ or in the following page: http://wiki.qt.io/Qt5DocumentationProject
+
+ Note: Building the documentation is only tested on desktop platforms.	 

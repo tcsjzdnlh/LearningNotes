@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="BuildQtOfficialDocRef">
+      <UniqueIdentifier>{26c6fd4c-2bec-4fbe-b0b1-b79fe927dcb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BuildConfigure">
+      <UniqueIdentifier>{a95d6c33-5535-41b3-ba72-28a53bed334e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BuildSteps">
+      <UniqueIdentifier>{d08f53c1-66e5-4528-b2a2-1e709bdd3f02}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BuildQt_README">
+      <Filter>BuildQtOfficialDocRef</Filter>
+    </None>
+    <None Include="Qt5.6_set_vars_and_build.cmd">
+      <Filter>BuildConfigure</Filter>
+    </None>
+    <None Include="configure_minimalbuildqt_dotcache">
+      <Filter>BuildConfigure</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Qt_Configure_Options.txt">
+      <Filter>BuildConfigure</Filter>
+    </Text>
+    <Text Include="Build_Qt_In_Minimal.txt">
+      <Filter>BuildConfigure</Filter>
+    </Text>
+    <Text Include="Qt5.6_Build_Configuration.txt">
+      <Filter>BuildConfigure</Filter>
+    </Text>
+    <Text Include="Qt5_on_Windows_ANGLE_and_OpenGL.txt">
+      <Filter>BuildConfigure</Filter>
+    </Text>
+    <Text Include="Graphics_on_Windows_from_a_different_angle.txt">
+      <Filter>BuildConfigure</Filter>
+    </Text>
+    <Text Include="Qt5_Build_steps.txt">
+      <Filter>BuildSteps</Filter>
+    </Text>
+    <Text Include="first_build_info.txt">
+      <Filter>BuildSteps</Filter>
+    </Text>
+    <Text Include="Configure_Building_Qt_Ref.txt">
+      <Filter>BuildConfigure</Filter>
+    </Text>
+    <Text Include="build_qt_on_windows.txt">
+      <Filter>BuildSteps</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

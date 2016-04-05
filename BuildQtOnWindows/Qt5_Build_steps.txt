@@ -1,0 +1,32 @@
+--------------------
+use a bat file do this work
+//----------------------------------------------------------------------------------------------------------
+1. set up system environment
+2. set up vc++ environment (vcvars.bat, will set up windows sdk, directxsdk, vc++ bin, ect.)
+3. set up perl/python/ruby environment
+3. set up icu (include, lib, bin)
+
+--------------------
+manual typing
+//----------------------------------------------------------------------------------------------------------
+
+4. configure: angle(opengle, 待补充), 
+			  dynamic loading,
+			  shadowbuild(build_dir, install_dir, source_dir),
+			  include modules(-feature-<featurename>, featurename can be find in qfeatures.txt),
+			  exclude modules(-skip modulename, -no-feature-<feature name>),			  
+			  thirdpart(use custom  system specified: -system-<partname>, 
+						use qt boundld: -qt-<partname>,
+						disable: -no-<partname> ),
+						
+			  specify compiler option( like: -platform win32-msvc2015 ),
+
+--------------------
+manual typing			  
+//----------------------------------------------------------------------------------------------------------			  
+5. buid: 
+		cd <path>\<source-package>
+		configure -prefix %cd%\qtbase <license> -nomake tests
+		nmake/jom/mingw32-make
+			  
+
