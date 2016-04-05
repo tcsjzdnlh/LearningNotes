@@ -1,0 +1,26 @@
+// 创建文件
+touch filename
+git add filename
+git commit -m "message"
+
+git status filename
+git log --pretty=oneline -- filename
+git reflog
+
+git reset --hard HEAD^ 
+git reset --hard operationid
+
+git checkout -- filename
+
+git rm filename
+
+git ssh-keygen -t rsa -C "youremail@"
+
+//关联远程代码库，origin 是远程仓库的名字，后面的是远程仓库的路径
+git remote add origin git@github.com:your_username/LearnGit.git
+
+// 首次推送代码 要加上 -u，master 为分支
+git push -u origin master
+
+//git 支持 https/ssh 两种协议路径，默认SSH
+git clone git@github.com:your_username/repository_name.git

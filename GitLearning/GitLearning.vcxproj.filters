@@ -4,10 +4,16 @@
     <Filter Include="GitWithVS2015">
       <UniqueIdentifier>{9ced1579-a98c-45b9-b3e0-1fee6b1e71b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GitCommand">
+      <UniqueIdentifier>{99b5a607-276e-4d8e-9bd4-0e7806e273d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CouldNotVCOpenDB.txt">
       <Filter>GitWithVS2015</Filter>
+    </Text>
+    <Text Include="git_command.txt">
+      <Filter>GitCommand</Filter>
     </Text>
   </ItemGroup>
 </Project>
