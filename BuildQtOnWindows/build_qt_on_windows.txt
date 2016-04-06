@@ -372,7 +372,9 @@
 		it may be necessary 
 		to install the libraries and binaries into the install directory. 
 		
-		The default for the installation directory depends on the platform; 
+		The default 
+		for the installation directory 
+		depends on the platform; 
 		configure's output mentions it. 
 		
 		To modify the installation directory, 			

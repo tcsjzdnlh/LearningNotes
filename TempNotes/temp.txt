@@ -1,0 +1,10 @@
+This is the default under Windows, and when Qt is configured with the -developer-build option.
+翻译1：
+windows下默认的设置，或者 Qt 以 -developer-build 选项 设置时, 都是这种结果
+翻译2：
+windows下的默认设置，并且 Qt 以 -developer-build 选项 设置时, 才是这种结果
+翻译3：
+当 Qt 设置为 -developer-build 选项时，这个结果在windows是默认设置
+翻译4：
+这个结果在windows是默认设置， 此时，Qt 被设置成 -developer-build 选项
+

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ads">
+      <UniqueIdentifier>{3af43278-eec8-47af-87d7-c261bf3ce647}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ads.txt">
+      <Filter>ads</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

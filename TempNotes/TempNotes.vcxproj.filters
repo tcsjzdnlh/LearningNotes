@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="VC++2015BugFixes">
+      <UniqueIdentifier>{a5cd17e3-de35-4fcd-b629-9e80a05a3ca9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BugFiexes.txt">
+      <Filter>VC++2015BugFixes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="temp.txt">
+      <Filter>VC++2015BugFixes</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

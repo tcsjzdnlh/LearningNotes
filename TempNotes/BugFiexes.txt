@@ -1,0 +1,18 @@
+We’re happy to have shipped Visual Studio 2015 Update 2 (grab a copy here!).
+This is a quick glance at the Visual C++ bugs 
+resolved that were reported on the Microsoft Connect portal.
+We have fixed 330 Connect and VS Feedback bugs 
+in the compiler frontend, backend, and libraries; 
+and an additional 30 bugs in the IDE 
+for Visual Studio 2015 Update 2.
+
+These bugs were submitted by the users in the community.
+Although we didn’t fix every reported customer issue(yet!), 
+we appreciate that our customers take the time to file bugs on our product, 
+and we try to prioritize the bugs 
+that come from the community.
+If you encounter issues while using our compiler, 
+please file bugs!
+It helps us know which issues should have the most attention.
+
+
