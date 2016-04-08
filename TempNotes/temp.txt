@@ -8,3 +8,59 @@ windows下的默认设置，并且 Qt 以 -developer-build 选项 设置时, 才
 翻译4：
 这个结果在windows是默认设置， 此时，Qt 被设置成 -developer-build 选项
 
+
+
+
+E:\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir_2\BuildDir>nmake
+
+Microsoft (R) Program Maintenance Utility Version 14.00.23506.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+        cd qtbase\ && ( if not exist Makefile E:\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir_2\BuildDir\qtbase\bin\qmake E:\CodeLibs\QtCode\Qt5.6\QtSrc5.6\qtbase\qtbase.pro -o Makefile ) && "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN\nmake.exe" -f Makefile
+
+Microsoft (R) Program Maintenance Utility Version 14.00.23506.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+        cd src\ && ( if not exist Makefile E:\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir_2\BuildDir\qtbase\bin\qmake E:\CodeLibs\QtCode\Qt5.6\qt-everywhere-opensource-src-5.6.0\qtbase\src\src.pro -o Makefile ) && "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN\nmake.exe" -f Makefile
+
+Microsoft (R) Program Maintenance Utility Version 14.00.23506.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+        cd corelib\ && ( if not exist Makefile.qtzlib E:\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir_2\BuildDir\qtbase\bin\qmake E:\CodeLibs\QtCode\Qt5.6\qt-everywhere-opensource-src-5.6.0\qtbase\src\corelib\qtzlib.pro -o Makefile.qtzlib ) && "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN\nmake.exe" -f Makefile.qtzlib
+
+Microsoft (R) Program Maintenance Utility Version 14.00.23506.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+        "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN\nmake.exe" -f Makefile.qtzlib.Debug all
+
+Microsoft (R) Program Maintenance Utility Version 14.00.23506.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+        "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN\nmake.exe" -f Makefile.qtzlib.Release all
+
+Microsoft (R) Program Maintenance Utility Version 14.00.23506.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+        cd tools\bootstrap\ && ( if not exist Makefile E:\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir_2\BuildDir\qtbase\bin\qmake E:\CodeLibs\QtCode\Qt5.6\qt-everywhere-opensource-src-5.6.0\qtbase\src\tools\bootstrap\bootstrap.pro -o Makefile ) && "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN\nmake.exe" -f Makefile
+
+Microsoft (R) Program Maintenance Utility Version 14.00.23506.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+        "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN\nmake.exe" -f Makefile.Debug
+
+Microsoft (R) Program Maintenance Utility Version 14.00.23506.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+NMAKE : fatal error U1073: don't know how to make 'E:\CodeLibs\QtCode\Qt5.6\qt-everywhere-opensource-src-5.6.0\qtbase\src\corelib\codecs\qlatincodec.cpp'
+Stop.
+NMAKE : fatal error U1077: '"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\BIN\nmake.exe"' : return code '0x2'
+Stop.
+NMAKE : fatal error U1077: 'cd' : return code '0x2'
+Stop.
+NMAKE : fatal error U1077: 'cd' : return code '0x2'
+Stop.
+NMAKE : fatal error U1077: 'cd' : return code '0x2'
+Stop.
+
+E:\CodeLibs\QtCode\Qt5.6\Qt5.6BuildAndInstallDir_2\BuildDir>
+
