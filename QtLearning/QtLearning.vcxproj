@@ -148,6 +148,12 @@
   <ItemGroup>
     <ClCompile Include="Qt_Notes.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="QPixmapNotes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="QStyle.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

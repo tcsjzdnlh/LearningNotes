@@ -4,10 +4,29 @@
     <Filter Include="QtAnimationFrameWork">
       <UniqueIdentifier>{a19bcd39-a8f2-4b5d-b091-7e74c96665f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Image">
+      <UniqueIdentifier>{39c2d5d6-747b-40a6-8762-980cc45d8cc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Image\QPixmap">
+      <UniqueIdentifier>{4b56b163-6ea2-4a29-8714-8f1c79098a35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Style">
+      <UniqueIdentifier>{ead7bdf3-c591-478b-856e-23d0c29c3e1b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Qt_Notes.cpp">
       <Filter>QtAnimationFrameWork</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="QPixmapNotes.txt">
+      <Filter>Image\QPixmap</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="QStyle.txt">
+      <Filter>Style</Filter>
+    </Text>
   </ItemGroup>
 </Project>
