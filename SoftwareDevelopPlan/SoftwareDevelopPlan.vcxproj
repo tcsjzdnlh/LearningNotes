@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{56386494-01B2-43F7-B5F2-EA0B0159EC50}</ProjectGuid>
+    <ProjectGuid>{1E8DC8C1-DE24-4A50-9DB0-587505738ECF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>QtLearning</RootNamespace>
+    <RootNamespace>SoftwareDevelopPlan</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,21 +146,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Qt_Notes.cpp" />
+    <Text Include="inputor.txt" />
+    <Text Include="NetManager.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="QPixmapNotes.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="CustomStyleTitleBarAndFrame.txt" />
-    <Text Include="QEvent.txt" />
-    <Text Include="QPainterPath.txt" />
-    <Text Include="QPalette.txt" />
-    <Text Include="QRegion.txt" />
-    <Text Include="QStyle.txt" />
-    <Text Include="QWidget.txt" />
-    <Text Include="TheEventSystem.txt" />
-    <Text Include="WindowFlags.txt" />
+    <ClInclude Include="Calculator.txt" />
+    <ClInclude Include="EnglishDict.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

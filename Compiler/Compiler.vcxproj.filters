@@ -1,2 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="VisualStudio">
+      <UniqueIdentifier>{f8fd39ed-c212-4527-8cb1-c4dec204ce34}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ProjectTemplate.txt">
+      <Filter>VisualStudio</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

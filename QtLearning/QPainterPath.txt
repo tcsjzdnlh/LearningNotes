@@ -1,0 +1,211 @@
+Detailed Description
+The QPainterPath class 
+provides a container for painting operations, 
+enabling graphical shapes to be constructed and reused.
+
+A painter path 
+is an object composed of a number of graphical building blocks, 
+such as rectangles, ellipses, lines, and curves. 
+Building blocks can be joined in closed subpaths, 
+for example as a rectangle or an ellipse. 
+A closed path has coinciding start and end points. 
+Or they can exist independently as unclosed subpaths, 
+such as lines and curves.
+
+A QPainterPath object 
+can be used for filling, outlining, and clipping. 
+
+To generate fillable outlines for a given painter path, 
+use the QPainterPathStroker class. 
+
+The main advantage of painter paths 
+over normal drawing operations 
+is that complex shapes only need to be created once; 
+then they can be drawn many times 
+using only calls to the QPainter::drawPath() function.
+
+QPainterPath provides a collection of functions 
+that can be used to obtain information about the path and its elements. 
+In addition 
+it is possible to reverse the order of the elements 
+using the toReversed() function. 
+There are also several functions 
+to convert this painter path object into a polygon representation. 
+
+Composing a QPainterPath
+A QPainterPath object can be constructed as an empty path, 
+with a given start point, 
+or as a copy of another QPainterPath object. 
+Once created, 
+lines and curves can be added to the path 
+using the lineTo(), arcTo(), cubicTo() and quadTo() functions. 
+The lines and curves 
+stretch from the currentPosition() to the position passed as argument.
+
+The currentPosition() of the QPainterPath object 
+is always the end position of the last subpath 
+that was added (or the initial start point). 
+
+Use the moveTo() function 
+to move the currentPosition() without adding a component. 
+The moveTo() function 
+implicitly starts a new subpath, 
+and closes the previous one. 
+Another way of starting a new subpath 
+is to call the closeSubpath() function 
+which closes the current path by adding a line 
+from the currentPosition() back to the path's start position. 
+
+Note that the new path will have (0, 0) 
+as its initial currentPosition().
+QPainterPath class 
+also provides several convenience functions 
+to add closed subpaths to a painter path:
+addEllipse(), addPath(), addRect(), 
+addRegion() and addText(). 
+
+The addPolygon() function 
+adds an unclosed subpath. 
+
+In fact, 
+these functions 
+are all collections of moveTo(), 
+lineTo() and cubicTo() operations.
+
+In addition, 
+a path can be added to the current path 
+using the connectPath() function. 
+But note that 
+this function 
+will connect the last element of the current path 
+to the first element of given one by adding a line.
+
+Below is a code snippet 
+that shows how a QPainterPath object can be used:
+
+￼
+
+  QPainterPath path;
+  path.addRect(20, 20, 60, 60);
+
+  path.moveTo(0, 0);
+  path.cubicTo(99, 0,  50, 50,  99, 99);
+  path.cubicTo(0, 99,  50, 50,  0, 0);
+
+  QPainter painter(this);
+  painter.fillRect(0, 0, 100, 100, Qt::white);
+  painter.setPen(QPen(QColor(79, 106, 25), 1, Qt::SolidLine,
+                      Qt::FlatCap, Qt::MiterJoin));
+  painter.setBrush(QColor(122, 163, 39));
+
+  painter.drawPath(path);
+
+
+The painter path 
+is initially empty when constructed. 
+We first add a rectangle, 
+which is a closed subpath. 
+Then we add two bezier curves 
+which together form a closed subpath 
+even though they are not closed individually. 
+Finally we draw the entire path. 
+The path is filled 
+using the default fill rule, 
+Qt::OddEvenFill. 
+
+Qt provides two methods for filling paths:
+
+Qt::OddEvenFill
+Qt::WindingFill
+￼
+￼
+
+See the Qt::FillRule documentation 
+for the definition of the rules. 
+
+A painter path's currently set fill rule 
+can be retrieved using the fillRule() function, 
+and altered using the setFillRule() function.
+ 
+QPainterPath Information
+
+The QPainterPath class 
+provides a collection of functions 
+that returns information about the path and its elements.
+
+The currentPosition() function 
+returns the end point of the last subpath 
+that was added (or the initial start point). 
+
+The elementAt() function 
+can be used to retrieve the various subpath elements, 
+the number of elements 
+can be retrieved using the elementCount() function, 
+and the isEmpty() function 
+tells whether this QPainterPath object 
+contains any elements at all.
+
+The controlPointRect() function 
+returns the rectangle containing all the points 
+and control points in this path. 
+This function 
+is significantly faster to compute 
+than the exact boundingRect() 
+which returns the bounding rectangle of this painter path 
+with floating point precision.
+
+Finally, 
+QPainterPath provides the contains() function 
+which can be used to determine 
+whether a given point or rectangle is inside the path, 
+and the intersects() function 
+which determines if any of the points 
+inside a given rectangle also are inside this path. 
+
+QPainterPath Conversion
+For compatibility reasons, 
+it might be required 
+to simplify the representation of a painter path: 
+QPainterPath provides the toFillPolygon(), 
+toFillPolygons() and toSubpathPolygons() functions 
+which convert the painter path into a polygon. 
+
+The toFillPolygon() 
+returns the painter path as one single polygon, 
+
+while the two latter functions 
+return a list of polygons.
+The toFillPolygons() and toSubpathPolygons() functions 
+are provided because it is usually faster 
+to draw several small polygons than to draw one large polygon, 
+even though the total number of points drawn is the same. 
+The difference between the two 
+is the number of polygons they return: 
+The toSubpathPolygons() 
+creates one polygon for each subpath 
+regardless of intersecting subpaths 
+(i.e. overlapping bounding rectangles), 
+while the toFillPolygons() functions
+creates only one polygon for overlapping subpaths.
+The toFillPolygon() and toFillPolygons() functions 
+first convert all the subpaths to polygons, 
+then uses a rewinding technique 
+to make sure that 
+overlapping subpaths can be filled using the correct fill rule. 
+Note that 
+rewinding inserts additional lines in the polygon 
+so the outline of the fill polygon 
+does not match the outline of the path. 
+
+Examples
+Qt provides the Painter Paths Example 
+and the Vector Deformation example 
+which are located in Qt's example directory.
+
+The Painter Paths Example 
+shows how painter paths can be used 
+to build complex shapes for rendering 
+and lets the user experiment with the filling and stroking. 
+
+The Vector Deformation Example 
+shows how to use QPainterPath to draw text.

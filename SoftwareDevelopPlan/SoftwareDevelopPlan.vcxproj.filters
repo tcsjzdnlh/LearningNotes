@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Caculator">
+      <UniqueIdentifier>{1730109f-f778-4135-8599-cc43be6abda7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PictureEditor">
+      <UniqueIdentifier>{8225b66f-6d00-4ab5-bb5a-c49b2b82b6fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetManager">
+      <UniqueIdentifier>{da0c7ad7-4dbf-4e12-968d-2f0d7f339031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnglishDict">
+      <UniqueIdentifier>{e0b9f317-1315-4ebb-8602-cc28eb72085d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Browser">
+      <UniqueIdentifier>{fbd7b925-ff42-4696-9e43-4a1baf0bbace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inputer">
+      <UniqueIdentifier>{5de08e13-4aeb-48b1-be9f-27960cc2fa05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MediaPlayer">
+      <UniqueIdentifier>{346103cd-e252-471e-8f8d-5d77eb25c81a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TimeManager">
+      <UniqueIdentifier>{7c9f5d27-8d35-4d6d-8ead-169520901891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LibraryManager">
+      <UniqueIdentifier>{17301126-f67b-44f0-a90a-f3fbe1acc99a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SuperMarketManager">
+      <UniqueIdentifier>{7f32bd8a-9379-44eb-aa32-a86f95a99d6e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="inputor.txt">
+      <Filter>inputer</Filter>
+    </Text>
+    <Text Include="NetManager.txt">
+      <Filter>NetManager</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EnglishDict.txt">
+      <Filter>EnglishDict</Filter>
+    </ClInclude>
+    <ClInclude Include="Calculator.txt">
+      <Filter>Caculator</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,287 @@
+enum Qt::WindowType
+flags Qt::WindowFlags
+This enum type is used 
+to specify various window-system properties for the widget. 
+They are fairly unusual but necessary in a few cases. 
+Some of these flags depend on 
+whether the underlying window manager supports them.
+The main types are
+
+Constant
+Value
+Description
+Qt::Widget		0x00000000				This is the default type for QWidget. 
+										Widgets of this type are child widgets if they have a parent, 
+										and independent windows if they have no parent. 
+										See also Qt::Window and Qt::SubWindow.
+
+
+Qt::Window		0x00000001				Indicates that the widget is a window, 
+										usually with a window system frame and a title bar, 
+										irrespective of whether the widget has a parent or not. 
+										Note that it is not possible to unset this flag 
+										if the widget does not have a parent.
+
+
+Qt::Dialog		0x00000002 | Window		Indicates that the widget is a window 
+										that should be decorated as a dialog 
+										(i.e., typically no maximize 
+										or minimize buttons in the title bar). 
+										This is the default type for QDialog. 
+										If you want to use it as a modal dialog, 
+										it should be launched from another window, 
+										or have a parent and used with the QWidget::windowModality property. 
+										If you make it modal, 
+										the dialog will prevent other top-level windows 
+										in the application from getting any input. 
+										We refer to a top-level window that has a parent as a secondary window.
+
+
+Qt::Sheet		0x00000004 | Window		Indicates that the window is a Macintosh sheet. 
+										Since using a sheet implies window modality, 
+										the recommended way is to use QWidget::setWindowModality(), 
+										or QDialog::open(), instead.
+
+
+Qt::Drawer		Sheet | Dialog			Indicates that the widget is a Macintosh drawer.
+
+
+Qt::Popup		0x00000008 | Window		Indicates that the widget is a pop-up top-level window, 
+										i.e. that it is modal, 
+										but has a window system frame, appropriate for pop-up menus.
+
+
+
+Qt::Tool		Popup | Dialog			Indicates that the widget is a tool window. 
+										A tool window is often a small window 
+										with a smaller than usual title bar and decoration, 
+										typically used for collections of tool buttons. 
+										If there is a parent, 
+										the tool window will always be kept on top of it. 
+										If there isn't a parent, 
+										you may consider using Qt::WindowStaysOnTopHint as well. 
+										If the window system supports it, 
+										a tool window can be decorated with a somewhat lighter frame. 
+										It can also be combined with Qt::FramelessWindowHint. 
+										On OS X, 
+										tool windows correspond to the Floating class of windows. 
+										This means that the window lives on a level above normal windows; 
+										it impossible to put a normal window on top of it. 
+										By default, 
+										tool windows will disappear when the application is inactive. 
+										This can be controlled by the Qt::WA_MacAlwaysShowToolWindow attribute.
+
+
+Qt::ToolTip		Popup | Sheet			Indicates that the widget is a tooltip. 
+										This is used internally to implement tooltips.
+
+
+Qt::SplashScreen	ToolTip | Dialog	Indicates that the window is a splash screen. 
+										This is the default type for QSplashScreen.
+
+
+Qt::Desktop		0x00000010 | Window		Indicates that this widget is the desktop. 
+										This is the type for QDesktopWidget.	
+
+
+Qt::SubWindow	0x00000012				Indicates that this widget is a sub-window, 
+										such as a QMdiSubWindow widget.
+
+
+Qt::ForeignWindow	0x00000020 | Window		Indicates that this window object is a handle 
+											representing a native platform window 
+											created by another process 
+											or by manually using native code.
+
+
+Qt::CoverWindow		0x00000040 | Window		Indicates that the window represents a cover window, 
+											which is shown when the application is minimized 
+											on the BlackBerry platform for instance.
+
+
+
+There are also a number of flags 
+which you can use to customize 
+the appearance of top-level windows. 
+These have no effect on other windows:
+
+Constant							Value				Description
+
+
+Qt::MSWindowsFixedSizeDialogHint	0x00000100			Gives the window a thin dialog border on Windows. 
+														This style is traditionally used for fixed-size dialogs.
+
+
+Qt::MSWindowsOwnDC					0x00000200			Gives the window its own display context on Windows.
+
+
+Qt::BypassWindowManagerHint			0x00000400			This flag can be used to indicate to the platform plugin 
+														that "all" window manager protocols should be disabled. 
+														This flag will behave different depending on 
+														what operating system the application is running on 
+														and what window manager is running. 
+														The flag can be used 
+														to get a native window with no configuration set.
+
+
+Qt::X11BypassWindowManagerHint		BypassWindowManagerHint		Bypass the window manager completely. 
+																This results in a borderless window 
+																that is not managed at all 
+																(i.e., no keyboard input 
+																unless you call QWidget::activateWindow() manually).
+
+
+Qt::FramelessWindowHint				0x00000800			Produces a borderless window. 
+														The user cannot move or resize a borderless window 
+														via the window system. 
+														On X11, 
+														the result of the flag 
+														is dependent on the window manager 
+														and its ability to understand Motif and/or NETWM hints. 
+														Most existing modern window managers can handle this.
+
+
+Qt::NoDropShadowWindowHint			0x40000000			Disables window drop shadow on supporting platforms.
+
+
+
+The CustomizeWindowHint flag 
+is used to enable customization of the window controls. 
+This flag must be set to allow the 
+WindowTitleHint, 
+WindowSystemMenuHint, 
+WindowMinimizeButtonHint, 
+WindowMaximizeButtonHint and 
+WindowCloseButtonHint flags to be changed.
+
+Constant						Value						Description
+
+
+Qt::CustomizeWindowHint			0x02000000					Turns off the default window title hints.
+
+
+Qt::WindowTitleHint				0x00001000					Gives the window a title bar.
+
+
+Qt::WindowSystemMenuHint		0x00002000					Adds a window system menu, 
+															and possibly a close button (for example on Mac). 
+															If you need to hide or show a close button, 
+															it is more portable to use WindowCloseButtonHint.
+
+
+Qt::WindowMinimizeButtonHint	0x00004000					Adds a minimize button. 
+															On some platforms this implies 
+															Qt::WindowSystemMenuHint for it to work.
+
+
+Qt::WindowMaximizeButtonHint	0x00008000					Adds a maximize button. 
+															On some platforms this implies 
+															Qt::WindowSystemMenuHint for it to work.
+
+
+Qt::WindowMinMaxButtonsHint		WindowMinimizeButtonHint	Adds a minimize and a maximize button. 
+								| WindowMaximizeButtonHint	On some platforms this implies 
+															Qt::WindowSystemMenuHint for it to work.
+								
+
+
+Qt::WindowCloseButtonHint		0x08000000					Adds a close button. 
+															On some platforms this implies 
+															Qt::WindowSystemMenuHint for it to work.
+
+
+Qt::WindowContextHelpButtonHint	0x00010000					Adds a context help button to dialogs. 
+															On some platforms this implies 
+															Qt::WindowSystemMenuHint for it to work.
+
+
+Qt::MacWindowToolBarButtonHint	0x10000000					On OS X adds a tool bar button 
+															(i.e., the oblong button that is on the top right of windows 
+															that have toolbars).
+
+
+Qt::WindowFullscreenButtonHint	0x80000000					On OS X adds a fullscreen button.
+
+
+Qt::BypassGraphicsProxyWidget	0x20000000					Prevents the window and its children 
+															from automatically embedding themselves 
+															into a QGraphicsProxyWidget 
+															if the parent widget is already embedded. 
+															You can set this flag if you want your widget 
+															to always be a toplevel widget on the desktop, 
+															regardless of whether the parent widget 
+															is embedded in a scene or not.
+
+
+Qt::WindowShadeButtonHint		0x00020000					Adds a shade button 
+															in place of the minimize button 
+															if the underlying window manager supports it.
+
+
+Qt::WindowStaysOnTopHint		0x00040000					Informs the window system that 
+															the window should stay on top of all other windows. 
+															Note that on some window managers on X11 
+															you also have to pass Qt::X11BypassWindowManagerHint 
+															for this flag to work correctly.
+
+
+Qt::WindowStaysOnBottomHint		0x04000000					Informs the window system that 
+															the window should stay on bottom of all other windows. 
+															Note that on X11 this hint will work only in window managers 
+															that support _NET_WM_STATE_BELOW atom. 
+															If a window always on the bottom has a parent, 
+															the parent will also be left on the bottom. 
+															This window hint is currently not implemented for OS X.
+
+
+Qt::WindowOkButtonHint			0x00080000					Adds an OK button to the window decoration of a dialog. 
+															Only supported for Windows CE.
+
+
+Qt::WindowCancelButtonHint		0x00100000					Adds a Cancel button to the window decoration of a dialog. 
+															Only supported for Windows CE.
+
+
+Qt::WindowTransparentForInput	0x00080000					Informs the window system that 
+															this window is used only for output 
+															(displaying something) 
+															and does not take input. 
+															Therefore input events should pass through 
+															as if it wasn't there.
+
+
+Qt::WindowOverridesSystemGestures	0x00100000				Informs the window system that 
+															this window implements its own set of gestures 
+															and that system level gestures, 
+															like for instance three-finger desktop switching, 
+															should be disabled.
+
+
+Qt::WindowDoesNotAcceptFocus		0x00200000				Informs the window system that 
+															this window should not receive the input focus.
+
+
+Qt::MaximizeUsingFullscreenGeometryHint		0x00400000		Informs the window system that 
+															when maximizing the window 
+															it should use as much of the available screen geometry as possible, 
+															including areas that may be covered by system UI 
+															such as status bars or application launchers. 
+															This may result in the window being placed 
+															under these system UIs, 
+															but does not guarantee it, 
+															depending on whether or not the platform supports it. 
+															When the flag is enabled 
+															the user is responsible for 
+															taking QScreen::availableGeometry() into account, 
+															so that any UI elements in the application that 
+															require user interaction are not covered by system UI.	
+
+
+Qt::WindowType_Mask				0x000000ff					A mask for extracting the window type part of the window flags.
+
+
+
+The WindowFlags type is a typedef for QFlags<WindowType>. 
+
+It stores an OR combination of WindowType values.
+See also QWidget::windowFlags and Window Flags Example.

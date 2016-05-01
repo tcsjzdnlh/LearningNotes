@@ -13,6 +13,15 @@
     <Filter Include="Style">
       <UniqueIdentifier>{ead7bdf3-c591-478b-856e-23d0c29c3e1b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Painter">
+      <UniqueIdentifier>{45619d5a-b579-47db-a31d-2ea976c2ac4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QtWidgets">
+      <UniqueIdentifier>{dac65337-6be6-45ed-83d6-5707652b2955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventSystem">
+      <UniqueIdentifier>{30d101db-11df-471f-96f6-6d80e07a0999}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Qt_Notes.cpp">
@@ -27,6 +36,30 @@
   <ItemGroup>
     <Text Include="QStyle.txt">
       <Filter>Style</Filter>
+    </Text>
+    <Text Include="QPainterPath.txt">
+      <Filter>Painter</Filter>
+    </Text>
+    <Text Include="CustomStyleTitleBarAndFrame.txt">
+      <Filter>Style</Filter>
+    </Text>
+    <Text Include="QWidget.txt">
+      <Filter>QtWidgets</Filter>
+    </Text>
+    <Text Include="QPalette.txt">
+      <Filter>Painter</Filter>
+    </Text>
+    <Text Include="QRegion.txt">
+      <Filter>QtWidgets</Filter>
+    </Text>
+    <Text Include="QEvent.txt">
+      <Filter>EventSystem</Filter>
+    </Text>
+    <Text Include="TheEventSystem.txt">
+      <Filter>EventSystem</Filter>
+    </Text>
+    <Text Include="WindowFlags.txt">
+      <Filter>QtWidgets</Filter>
     </Text>
   </ItemGroup>
 </Project>
