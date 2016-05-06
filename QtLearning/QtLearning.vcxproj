@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="QRegularExpression.txt" />
     <ClCompile Include="Qt_Notes.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,12 +155,15 @@
   <ItemGroup>
     <Text Include="CustomStyleTitleBarAndFrame.txt" />
     <Text Include="QEvent.txt" />
+    <Text Include="QMetaEnum.txt" />
+    <Text Include="QObject.txt" />
     <Text Include="QPainterPath.txt" />
     <Text Include="QPalette.txt" />
     <Text Include="QRegion.txt" />
     <Text Include="QStyle.txt" />
     <Text Include="QWidget.txt" />
     <Text Include="TheEventSystem.txt" />
+    <Text Include="ThePropertySystem.txt" />
     <Text Include="WindowFlags.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

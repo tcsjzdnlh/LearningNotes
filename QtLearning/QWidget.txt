@@ -1,4 +1,4 @@
-Detailed Description
+------------Detailed Description-----------------
 
 The QWidget class 
 is the base class of all user interface objects.
@@ -51,7 +51,7 @@ There are many subclasses which provide real functionality,
 such as QLabel, QPushButton, QListWidget, and QTabWidget. 
 
 
-Top-Level and Child Widgets
+--------Top-Level and Child Widgets-----------------
 A widget without a parent widget 
 is always an independent window (top-level widget). 
 For these widgets, 
@@ -77,7 +77,7 @@ to the parent QWidget.
 See Layout Management for more information. 
 
 
-Composite Widgets
+-----------------Composite Widgets---------------------------
 When a widget is used as a container 
 to group a number of child widgets, 
 it is known as a composite widget. 
@@ -99,7 +99,7 @@ and it is also covered in the Qt Tutorials.
 
 
 
-Custom Widgets and Painting
+------------------Custom Widgets and Painting---------------------
 Since QWidget is a subclass of QPaintDevice, 
 subclasses can be used to display custom content 
 that is composed using a series of painting operations 
@@ -120,7 +120,7 @@ shows how a simple widget can handle paint events.
 
 
 
-Size Hints and Size Policies
+-----------------Size Hints and Size Policies------------------
 When implementing a new widget, 
 it is almost always useful 
 to reimplement sizeHint() 

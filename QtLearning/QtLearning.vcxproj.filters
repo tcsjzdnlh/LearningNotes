@@ -22,10 +22,19 @@
     <Filter Include="EventSystem">
       <UniqueIdentifier>{30d101db-11df-471f-96f6-6d80e07a0999}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Qtcore">
+      <UniqueIdentifier>{9fee5580-91c2-42d5-b224-a075f5dbc90f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qtcore\QObject">
+      <UniqueIdentifier>{aa8dc0e3-2984-4b72-b030-4c0fcf7aac5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Qt_Notes.cpp">
       <Filter>QtAnimationFrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="QRegularExpression.txt">
+      <Filter>Qtcore</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +69,15 @@
     </Text>
     <Text Include="WindowFlags.txt">
       <Filter>QtWidgets</Filter>
+    </Text>
+    <Text Include="QObject.txt">
+      <Filter>Qtcore\QObject</Filter>
+    </Text>
+    <Text Include="QMetaEnum.txt">
+      <Filter>Qtcore</Filter>
+    </Text>
+    <Text Include="ThePropertySystem.txt">
+      <Filter>Qtcore</Filter>
     </Text>
   </ItemGroup>
 </Project>

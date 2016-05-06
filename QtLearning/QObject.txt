@@ -1,0 +1,38 @@
+Q_ENUM(... )
+This macro registers an enum type 
+with the meta-object system. 
+It must be placed after the enum declaration 
+in a class that has the Q_OBJECT 
+or the Q_GADGET macro.
+For example:
+
+  class MyClass : public QObject
+  {
+      Q_OBJECT
+
+  public:
+      MyClass(QObject *parent = 0);
+      ~MyClass();
+
+      enum Priority { High, Low, VeryHigh, VeryLow };
+      Q_ENUM(Priority)
+      void setPriority(Priority priority);
+      Priority priority() const;
+  };
+
+Enumerations that are declared with Q_ENUM 
+have their QMetaEnum registered in the enclosing QMetaObject. 
+You can also use QMetaEnum::fromType() to get the QMetaEnum.
+Registered enumerations are 
+automatically registered also 
+to the Qt meta type system, 
+making them known to QMetaType 
+without the need to use Q_DECLARE_METATYPE(). 
+This will enable useful features; 
+for example, 
+if used in a QVariant, 
+you can convert them to strings. 
+Likewise, 
+passing them to QDebug will print out their names.
+This function was introduced in Qt 5.5.
+See also Qt's Property System.
